@@ -1,0 +1,338 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2685.7">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+  </style>
+</head>
+<body>
+<p class="p1">&lt;!DOCTYPE html&gt;</p>
+<p class="p1">&lt;html lang="ko"&gt;</p>
+<p class="p1">&lt;head&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;meta charset="UTF-8"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;title&gt;HR Voca Master&lt;/title&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;meta name="apple-mobile-web-app-capable" content="yes"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;style&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>* { box-sizing: border-box; margin: 0; padding: 0; user-select: none; -webkit-tap-highlight-color: transparent; }</p>
+<p class="p1"><span class="Apple-converted-space">    </span>body { width: 100vw; height: 100dvh; background: #0f172a; color: #fff; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; display: flex; flex-direction: column; overflow: hidden; padding: 12px 14px 40px 14px; }</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.dash, .quiz { display: none; flex-direction: column; height: 100%; }</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.active { display: flex; }</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.title { font-size: 24px; font-weight: 900; color: #38bdf8; text-align: center; margin-bottom: 10px; margin-top: 2px; }</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.btn-main { background: #38bdf8; color: #0f172a; border: none; border-radius: 12px; padding: 13px; font-size: 17px; font-weight: bold; cursor: pointer; margin-bottom: 8px; }</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.btn-main:active { opacity: 0.8; }</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.btn-sub { background: #1e293b; color: #f8fafc; border: 1px solid #334155; }</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.btn-sub span { color: #ef4444; font-weight: bold; }</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.btn-note { background: #1e293b; color: #f8fafc; border: 1px solid #475569; }</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.btn-note span { color: #f59e0b; font-weight: bold; }</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.history { flex: 1; background: #1e293b; border-radius: 12px; padding: 10px; overflow-y: auto; margin-bottom: 8px; border: 1px solid #334155; }</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.hist-item { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #334155; font-size: 14px; }</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.hist-item:last-child { border-bottom: none; }</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.top-bar { display: flex; justify-content: space-between; align-items: center; color: #94a3b8; font-weight: bold; font-size: 15px; height: 24px; }</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.card { flex: 1; min-height: 0; background: #1e293b; border-radius: 14px; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 15px 10px; text-align: center; box-shadow: 0 4px 16px rgba(0,0,0,0.4); margin: 8px 0; position: relative; }</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.word-area { display: flex; align-items: center; justify-content: center; gap: 10px; flex-wrap: wrap; }</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.word { font-size: 36px; font-weight: 900; color: #38bdf8; word-break: keep-all; line-height: 1.2; }</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.word.ko { font-size: 26px; color: #f8fafc; }</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.speak-btn { background: #334155; border: none; border-radius: 50%; width: 38px; height: 38px; font-size: 18px; cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.speak-btn:active { background: #475569; }</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.opts { display: grid; grid-template-columns: 1fr; gap: 8px; }</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.opt-btn { background: #334155; color: #fff; border: none; border-radius: 12px; padding: 12px 10px; font-size: 18px; font-weight: 600; min-height: 52px; cursor: pointer; display: flex; align-items: center; justify-content: center; text-align: center; word-break: keep-all; line-height: 1.2; }</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.opt-btn:active { opacity: 0.8; }</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.opt-btn.ok { background: #16a34a !important; font-weight: 800; }</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.opt-btn.no { background: #dc2626 !important; }</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.bot-bar { text-align: center; margin-top: 4px; }</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.txt-btn { background: none; border: none; color: #94a3b8; font-size: 14px; text-decoration: underline; cursor: pointer; padding: 4px; }</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.mod { display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100dvh; background: rgba(15,23,42,0.98); z-index: 99; padding: 16px 16px 50px 16px; flex-direction: column; }</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.ta { flex: 1; border-radius: 8px; padding: 12px; font-size: 15px; width: 100%; resize: none; margin-top: 12px; background: #1e293b; color: #fff; border: 1px solid #334155; }</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.m-btns { display: flex; gap: 10px; margin-top: 12px; height: 46px; }</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.m-btn { flex: 1; border-radius: 8px; border: none; font-weight: bold; font-size: 16px; cursor: pointer; }</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.m-btn.s { background: #38bdf8; color: #0f172a; }</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.m-btn.c { background: #334155; color: #fff; }</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.note-list { flex: 1; overflow-y: auto; margin-top: 12px; display: flex; flex-direction: column; gap: 8px; }</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.note-card { background: #1e293b; border: 1px solid #334155; border-radius: 10px; padding: 10px 12px; display: flex; align-items: center; justify-content: space-between; gap: 8px; }</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.note-info { flex: 1; min-width: 0; }</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.note-word-row { display: flex; align-items: center; gap: 8px; margin-bottom: 3px; }</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.note-w { font-size: 17px; font-weight: bold; color: #38bdf8; word-break: break-all; }</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.note-badge { background: #ef4444; color: #fff; font-size: 11px; font-weight: bold; padding: 2px 6px; border-radius: 10px; flex-shrink: 0; }</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.note-m { font-size: 14px; color: #cbd5e1; word-break: keep-all; }</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.btn-done { background: #16a34a; color: #fff; border: none; border-radius: 8px; padding: 8px 12px; font-size: 13px; font-weight: bold; cursor: pointer; flex-shrink: 0; }</p>
+<p class="p1"><span class="Apple-converted-space">    </span>@media (max-height: 700px) {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>.word { font-size: 30px; }</p>
+<p class="p1"><span class="Apple-converted-space">      </span>.word.ko { font-size: 22px; }</p>
+<p class="p1"><span class="Apple-converted-space">      </span>.opt-btn { min-height: 46px !important; font-size: 16px !important; padding: 6px !important; }</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/style&gt;</p>
+<p class="p1">&lt;/head&gt;</p>
+<p class="p1">&lt;body&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div id="dash" class="dash active"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="title"&gt;HR Voca Master&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;button class="btn-main" onclick="start(false)"&gt;새 퀴즈 시작 (20문제)&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;button class="btn-main btn-sub" onclick="start(true)"&gt;틀린 단어 복습 (&lt;span&gt;&lt;b id="w-cnt"&gt;0&lt;/b&gt;&lt;/span&gt;개)&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;button class="btn-main btn-note" onclick="openNote()"&gt;오답 암기장 (&lt;span&gt;&lt;b id="n-cnt"&gt;0&lt;/b&gt;&lt;/span&gt;개)&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div style="font-size:13px; color:#94a3b8; margin: 3px 0; font-weight:bold;"&gt;누적 성적&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="history" id="hist-list"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="bot-bar"&gt;&lt;button class="txt-btn" onclick="openM()"&gt;단어풀 추가/변경 (현재: &lt;b id="t-cnt"&gt;0&lt;/b&gt;개)&lt;/button&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div id="quiz" class="quiz"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="top-bar"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;span id="q-mode"&gt;퀴즈&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;span id="q-prog" style="color:#38bdf8;"&gt;1 / 20&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="card"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="word-area"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="word" id="qw"&gt;로딩중&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;button class="speak-btn" onclick="speakWord()" title="발음 듣기"&gt;🔊&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="opts" id="opts"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="bot-bar"&gt;&lt;button class="txt-btn" onclick="goDash()"&gt;중단하고 나가기&lt;/button&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="mod" id="mod"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div style="color:#fff; font-weight:bold; font-size:18px;"&gt;단어풀 추가 및 수정&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;textarea class="ta" id="ta" placeholder="추가할 단어=뜻, 단어=뜻 형태로 입력하세요. (기본값 초기화는 'reset' 입력)"&gt;&lt;/textarea&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="m-btns"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;button class="m-btn s" onclick="saveM()"&gt;추가/적용하기&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;button class="m-btn c" onclick="closeM()"&gt;취소&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="mod" id="note-mod"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div style="display:flex; justify-content:space-between; align-items:center;"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div style="color:#fff; font-weight:bold; font-size:18px;"&gt;오답 암기장 &lt;span style="font-size:13px; color:#f59e0b;"&gt;(자주 틀린 순)&lt;/span&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;button class="txt-btn" style="color:#38bdf8; font-size:15px; text-decoration:none;" onclick="closeNote()"&gt;닫기 ✕&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="note-list" id="note-list"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;script&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const dRaw = `abandon=포기하다|abdicate=퇴위하다|ableism=장애인 차별|absolutes=절대 원칙|abstract=추상적인|abuse=남용/학대|acceptance=수용|accolades=포상/찬사|accommodate=편의를 제공하다|accompanied=동반되는|accountable=책임이 있는|accusation=비난/고발|acclimate=적응하다|acknowledgment=승인/인정|actionable=실행 가능한|acumen=통찰력|adaptation=적응|address=해결하다|adequately=적절하게|adherence=준수|adjacent=인접한|administer=집행하다|admit=인정하다|adverse=불리한|adversely=불리하게|adversary=상대방|adversarial=적대적인|advice=조언|advocate=옹호하다|affinity=친밀감|affirmative=적극적 조치|affirmed=확인된|affordable=감당할 수 있는|ageism=연령차별|aggregation=집계|agility=민첩성|agreed-upon=합의된|aid=지원|aimed=겨냥한|alarmed=불안해하는|alienate=소외시키다|allotted=할당된|allyship=연대|alter=변경하다|alternative dispute resolution=대안적 분쟁 해결|ambiguous=모호한|amid=~ 가운데|anecdotes=일화|animosity=적대감|anniversary=기념일|annoying=짜증나는|anonymity=익명성|anonymous=익명의|anti-union=반노조의|anticipate=예상하다|anxiety=불안|appeal=호소/매력|applicable=적용 가능한|appraise=평가하다|approachability=접근성|appropriately=적절하게|aptitude=적성|arbitration=중재|argument=주장/논쟁|arise=발생하다|articulate=명확히 표현하다|articulating=명확히 표현하는|asexually=무성생식으로|aspect=측면|aspirational=지향적인|assert=주장하다|assertiveness=자기주장|assets=자산|assimilate=동화되다|attain=달성하다|attainable=달성 가능한|attempt=시도하다|attest=증명하다|attire=복장|attribute=원인을 돌리다|attributable=기인하는|attributes=특성/속성|auditory=청각의|authentic=진정성 있는|authenticity=진정성|authoritative=권위 있는|autocratic=독재적인|autonomy=자율성|avoidance=회피|awkward=어색한|backseat=보조적인 위치|backing=지원/후원|backlash=반발|balance sheet=재무상태표|balance sheets=대차대조표|balanced scorecard=균형성과표(BSC)|barge=바지선|bargaining=협상|bargaining power=협상력|barrier=장벽|based upon=~에 근거하여|be bold=대담해지다|be cited by=인용되다|be overwhelmed with=~에 휩싸이다|be scratched from=제외되다|behaves=행동하다|behooves=마땅히 해야 한다|behalf=대표/이익|belittled=폄하된|benefit program=복리후생 제도|bereavement=사별|biases=편견|bifurcation=이원화|blend=혼합하다|blind spots=사각지대|blurred=흐릿한|bounced back=반등하다|braille=점자|brain drain=인재 유출|breaching=위반/침해|brink=직전/위기|broaden=넓히다|brokering=중개|budgetary=예산의|burden=부담|bureaucratic=관료주의적인|business case=사업 타당성|business case analysis=사업 타당성 분석|buy-in=동의/지지|bypass=우회하다|capability=역량|capture=포착하다|caregiver=돌봄 제공자|cascading=계단식의|cease=중단하다|centered on=중심으로 하는|champion=옹호하다|chore=허드렛일|circumstance=상황|circumstances=환경/정황|clamoring=강력히 요구하는|clinging=집착하는|closeness=친밀함|closures=폐쇄|cluster=무리/군집|code of conduct=행동강령|co-create=공동 창출하다|cognitive=인지적인|coherence=일관성|cohesion=응집력|cohort=동질 집단|collective bargaining agreement=단체 협약|combine=결합하다|commute distance=통근 거리|compa-ratios=급여 수준 지표|comparable=비교할 만한|compelling=설득력 있는|compensation=보상/급여|competition=경쟁|compile=수집하다|complaint=불만/고충|complaint processing=고충 처리|complement=보완하다|complementary=보완적인|completion=완료|compliance=법규 준수|compliment=칭찬|comprehensive=포괄적인|compromise=타협하다|compulsory=강제적인|concentrate=집중하다|conceive=생각해내다|conceivable=상상할 수 있는|concise=간결한|conclude=결론짓다|concurrently=동시에|conduct=수행하다|confidentiality=기밀성|conflict-of-interest protocol=이해충돌 방지 규정|conform=순응하다|conformity=순응/일치|conforming=순응하는|confronts=직면하다|confront=맞서다|confrontational=대립적인|consequence=결과|consideration=배려/고려|consistency=일관성|consolidating=통합하는|constructs=구성 개념|constructively=건설적으로|consultation=자문/협의|contingent=상황에 따른|contingent reward=조건부 보상|contingencies=비상 대책|contract stating=계약 명시 조항|controversy=논란|conventions=관례/총회|conversely=반대로|convey=전달하다|converts=전환하다|cope=대처하다|corporate suite=임원실|corrective=교정하는|corrective measures=시정 조치|correlation=상관관계|count upon=의지하다|courteous=정중한|crew foreman=작업반장|credibility=신뢰성|criterion=기준|criticize=비판하다|critically=비판적으로|crucial=중대한|C-suite=최고경영진|cultivates=배양하다|cumulative=누적되는|customary=관례적인|cutback=감축/구조조정|cutting remarks=신랄한 발언|data breaches=데이터 유출|deal with=처리하다|decent=괜찮은|declaration=선언|decorum=예의/단정함|dedicate=헌신하다|deepen=심화시키다|deferred=이연된|deliberately=의도적으로|delightful=유쾌한|demographics=인구 통계|demoralize=사기를 꺾다|dent=약화/훼손|dependent-care=부양가족 돌봄|depict=묘사하다|deploy=배치하다|derived=파생된|descriptive statistics=기술 통계|deserve=자격이 있다|desirable=바람직한|despair=절망|determine=결정하다|detracts=저하시키다|detriment=손실/손해|detriments=불이익|devaluing=평가절하하는|developmental=발달상의|deviate=벗어나다|devotion=헌신|diagnosis=진단|differ from=~와 다르다|differentiate=차별화하다|differentiated=차별화된|diffusing=분산시키는|dignity=존엄성|dilution=희석|diminish=감소시키다|dip into=조금씩 손대다|diplomatically=외교적으로|disallow=불허하다|discard=폐기하다|discarded=폐기된|disciplinary=징계의|disciplinary action=징계 조치|disclosure=공개/폭로|discord=불화|discourage=단념시키다|discourteous=무례한|discrepancy=불일치|discrepancies=차이/불일치|discrimination=차별|disgruntlement=불만|dismiss=해고하다|disperse=분산시키다|dispersed=분산된|dispose=처분하다|dispute=분쟁|disruptive=지장을 주는|distractors=오답 보기|distasteful=불쾌한|distill=핵심을 추출하다|distribute=배포하다|distribution=분포/배분|diverse=다양한|diversification=다각화|diversify=다각화하다|divestiture=사업 매각|documenting=문서화|dominate=지배하다|dominance=지배력|dozens=수십의|driveway=진입로|driver=추진 요인|due diligence=실사/주의 의무|dysfunction=기능 장애|earnest=진지한|elective=선택적인|embarking=착수하는|embodies=구현하다|embrace=포용하다|embraces=아우르다|emerging=떠오르는|emerging markets=신흥 시장|empathy=공감|empathetically=공감하여|emphasize=강조하다|employing=고용하는|empowered=권한이 부여된|enact=제정하다|encompass=포함하다|encompasses=포괄하다|encounter=마주치다|encourage=장려하다|ended up=결국 ~하게 되다|enforcement=집행|enforcement agencies=법 집행 기관|enforcing=집행하는|engagement=몰입/참여|enhance=향상시키다|enrollment=등록/가입|entitle=권리를 주다|entrenched=고착화된|entrepreneurial=기업가적인|equity=공평성/자본|equitable=공정한|equalization=균등화|era=시대|erode=약화시키다|escalating=확대되는|espionage=산업 스파이 행위|espouse=지지하다|establish=확립하다|estoppel=금반언|ethical code of conduct=윤리 행동강령|ethical integrity=윤리적 무결성|ethnicity=민족성|evade=회피하다|evidentiary value=증거 가치|evasive=얼버무리는|evoke=환기하다|examine=검토하다|excavation=발굴|exceptional=예외적인|exceptionally=예외적으로|excessive=과도한|exclusion=배제|exclusive=배타적인|excusing=변명하는|execution=실행|exemption=면제|exhibit=보여주다|existence=존재|exodus=집단 이탈|expedience=편의주의|expenditure=지출|expertise=전문성|explicitly=명시적으로|exploded=폭발했다|exploit=착취하다|exposure=위험 노출|extensive=광범위한|extraordinary=뛰어난|extroversion=외향성|facet=측면|facilitate=촉진하다|fairness=공정성|falter=주춤하다|Family and Medical Leave Act=가족의료휴가법|fancy=화려한|favorableness=호의성|favoritism=편애|federal laws=연방 법|femininity=여성성|festivities=축제|fiduciary=수탁자의|filing=제출/접수|findings=조사 결과|fines=벌금|firsthand=직접적인|fiscal=재정의|flourish=번영하다|fluency=유창함|folks=사람들|foothold=발판|forego=포기하다|foreman=작업반장|foresight=선견지명|forgive=용서하다|forming=형성|formulate=수립하다|fostering=육성|fragmented=파편화된|Fraudulent=사기의|friction=마찰|frustrated=좌절한|fulfill=이행하다|fulfillment=이행/완수|full-blown=본격적인|further analysis=추가 분석|gain buy-in=지지를 얻다|galvanized=아연 도금된|generate=창출하다|generic=일반적인|genuine=진정한|geocentric=지구중심적인|global integration=글로벌 통합|govern=통제하다|grievance=고충|grounding=기초 교육|groundbreaking=획기적인|halt=중단|handful=소수|harassment=괴롭힘|hardships=고난|harnessing=활용하는|hazard=위험 요소|headed=향하는|headlining=주목받는|heartbeat=순간/고동|hectic=몹시 바쁜|held onto=고수하다|highlight=강조하다|hinder=방해하다|hold accountable=책임을 묻다|holistic=총체적인|holistically=전체론적으로|hospitality=서비스업/환대|household=가구/가정|hydraulic=유압의|identify=식별하다|illicit=불법의|immaterial=중요하지 않은|immensely=엄청나게|impair=손상시키다|impartial=치우치지 않은|impartiality=중립성|impatient=성급한|impulsive=충동적인|in addition to=~에 더하여|inborn=타고난|inability=무능|inadequate=부적절한|incident=사건|inclusion=포용|inclusive=포용적인|inclusiveness=포용성|income statements=손익계산서|incorporate=통합하다|increasingly=점점 더|incremental=점진적인|incumbent=재직자/현직의|incur=초래하다|incurring=발생시키는|indicate=나타내다|indispensable=필수불가결한|individualism=개인주의|inevitable=불가피한|influential=영향력 있는|infrastructure=기반 시설|ingrained=뿌리 깊은|inherently=본질적으로|initiative=진취성/계획|innocent=무고한|in-depth=심층적인|inspirational=영감을 주는|instill=주입하다|instilling=불어넣는|intake=섭취/수용|integrity=무결성/정직|intellectual=지적인|intensify=강화하다|internal mobility=사내 이동성|interpersonal=대인관계의|interpretation=해석|interpret=해석하다|intersectionality=교차성|intervention=개입|interventions=중재 조치|intervene=개입하다|intermittent=간헐적인|introversion=내향성|intrinsic=내재적인|intrinsically=본질적으로|inventive=창의적인|irritation=짜증|jeopardize=위태롭게 하다|jointly=공동으로|juggle=동시에 처리하다|jumping into=뛰어들다|jury=배심원단|justification=정당화|justify=정당화하다|keeping in mind=염두에 두고|kinesthetic=운동감각의|lactation=수유|laissez-faire=자유방임주의|laborer=근로자|landscaping work=조경 작업|lawful=합법적인|lawsuit=소송|laying out=제시하다|leading-edge=최첨단의|Leading Indicators=선행 지표|legal challenge=법적 이의제기|legal exposure=법적 노출 위험|legally binding=법적 구속력이 있는|legislation=입법|legislative=입법부의|legitimize=정당화하다|leverage=활용하다|liabilities=부채/책임|liability=법적 책임|lifeblood=생명줄|likelihood=가능성|likewise=마찬가지로|linkages=연계성|literature=문헌|litigation=소송|load=채워넣다|local chamber of commerce=지역 상공회의소|local responsiveness=현지 대응성|long-tenured=장기 근속의|loose=느슨한|loyal=충성스러운|Management by walking around=현장 순회 경영|mandating=의무화하는|manipulate=조종하다|marijuana=대마초|masculinity=남성성|matures=성숙하다|maturity=성숙도|measured=신중한|measures=척도/조치|mediate=중재하다|mediation=조정|mediator=중재자|memorize=암기하다|merely=단지|merger=합병|methodology=방법론|metrics=지표|microaggressions=미세 공격|migrate=이동하다|mindfully=유념하여|mindset=사고방식|minorities=소수 집단|minority=소수자|mired=수렁에 빠진|mischaracterize=잘못 묘사하다|misinterpret=오해하다|misleading=오해를 부르는|misrepresentation=허위 진술|misstep=실책|mitigate=완화하다|monetary=금전적인|monocracies=독재 정치|monogenic=단일 기원의|morale=사기|morale-eroding=사기를 꺾는|multigendered=다성별의|multigenerational=다세대의|multicultural=다문화의|multilingual=다국어의|multitalented=다재다능한|multitude=수많은|mutual=상호간의|myriad=무수한|mythology=잘못된 통념|narrow=좁히다|nepotism=족벌주의|neurodiversity=신경 다양성|new entrants=신규 진입자|niche market=틈새 시장|nonadherence=불이행|noncompliance=법규 위반|nonconsecutive=비연속적인|Nonexempt employees=비면제 근로자|nonimmigrant=비이민자|non-negotiable=협상 불가한|nonprofits=비영리 단체|not-for-profit=비영리의|non-qualified=비적격의|norm=규범|notable=주목할 만한|nuance=미묘한 차이|nuanced=미묘한 차이가 있는|objective=객관적인|obscure=모호하게 하다|obtain=확보하다|obvious=명백한 것|occupations=직종|offending=문제가 되는|offset=상쇄하다|offsetting=상쇄하는|offshore=해외 이전하다|offshoring=오프쇼어링|often-underrated=과소평가되는|omit=누락하다|ongoing=진행 중인|openly=공공연히|openness=개방성|optics=외부 시선|opportunistic=기회주의적인|opt-in=사전 동의|opt-out=사후 거부|ornamental=장식용의|outcome=결과|outreach=적극적 지원|outbid=더 높게 입찰하다|overarching=포괄적인|overhauling=전면 개편하는|overlook=간과하다|overly=지나치게|oversee=감독하다|oversight=감독/실수|oversimplifies=지나치게 단순화하다|Over time=시간이 지나면서|overt=명백한|overwhelming=압도적인|owning=책임지는|paid day off=유급 휴가일|paid time off=유급 휴가|parties=당사자들|passive=수동적인|paternalistic=가부장적인|paternity leave=배우자 출산휴가|paving=기반을 닦는|payload=적재량|penetration=시장 침투|perceive=인지하다|perception=인식|perception of bias=편견에 대한 인식|periodically=주기적으로|permanent=영구적인|permeates=스며들다|permit=허용하다|persistence=끈기|persistent=끈질긴|perspective=관점|persuade=설득하다|persuasive=설득력 있는|pertaining=관련된|petition=청원|philosophy=철학|pioneering=선구적인|pitch=제안하다|planned=계획된|playing favorite=편애하는|pleading=애원하는|p&amp;l statement=손익계산서|ponder=숙고하다|portions=부분들|portray=묘사하다|possess=갖추다|potentially=잠재적으로|powerholder=권력자|precisely=정확하게|preconception=선입견|preconceived=선입관의|precondition=전제 조건|predisposition=성향|preferable=바람직한|preliminary=예비의|premature=시기상조의|premise=전제|preponderance=우세|prerequisite=필수 전제 조건|prevail=우세하다|prevalence=만연|primary=주요한|primarily=주로|prima facie=일견 타당한|principle=원칙|prioritize=우선순위를 매기다|prioritization=우선순위화|prior to=~에 앞서|proactive=주도적인|proactively=선제적으로|problematic=문제가 많은|proficiency=능숙도|profit and loss sheets=손익계산서|profitable=수익성 있는|promissory=약속의|prone to=~하기 쉬운|pronouns=대명사|proprietary information=영업 비밀|proponent=지지자|provision=조항|provisions=규정들|provisional=잠정적인|provoke=유발하다|pulverizing=분쇄|punitive=징벌적인|purposeful=목적이 있는|pursue=추구하다|put forth=제시하다|qualification=자격 요건|qualifiers=조건/수식어|quantify=수치화하다|questionable=의심스러운|quotas=할당량|race=인종|racially=인종적으로|racism=인종차별|radical=급진적인|radiating=퍼져나가는|ramp-up time=가동 준비 기간|rational=합리적인|rationale=근거|reach out to=연락하다|reactive=사후 대응적인|readily=기꺼이|reaffirm=재확인하다|realm=영역|reassurance=안심시킴|recapturing=되찾기|receptivity=수용성|reclaim=되찾다|recognition=인정|reconciliation=화해/조정|reconfirm=재확인하다|recoup=만회하다|recreational=오락용의|recur=재발하다|recurrence=재발|reduction=감소|redundant=중복된/잉여의|reflective=성찰적인|refresher=보수 교육|refurbished=재단장한|refusal=거절|refuse=거절하다|regard=여기다|regardless of=~와 상관없이|regulator=규제 기관|regulators=감독 당국|rehabilitation=재활|reimbursement=비용 상환|reinstating=복직시키는|reiterate=반복하다|relatability=공감대|relevance=관련성|reliable=신뢰할 수 있는|reliance=의존|religious=종교적인|reluctant=꺼리는|remainder=나머지|remedy=구제책|rendering=제공/표현|reprimand=질책하다|represent=대표하다|reputational harm=평판 훼손|requested=요청된|requisition=인력 충원 요청|rescinded=철회된|reservists=예비군|residential=주거지의|resilience=회복 탄력성|resistance=저항|resolution=해결/결의|responsiveness=민감성/대응성|restore=복원하다|restricted=제한된|rests on=~에 달려 있다|retaliation=보복|retrieve=회수/검색하다|retroactive=소급하는|retroactively=소급하여|retrospective=회고적인|reveal=드러내다|rewarded=보상받는|rigorous=엄격한|rivalry=경쟁|roll out=출시하다|rushing=서두르는|sarcasm=비꼬기|scalable=확장 가능한|scarcity=희소성|scatterplots=산점도|schism=분열|scratch=삭제하다|secure=확보하다|segregate=분리하다|sentiment=정서|settlements=합의금|settling=정산하는|severe=심각한|severely=엄격하게|sexual harassment=성희롱|shamed=수치심을 느낀|shaping=형성|shareholder=주주|shredding=파쇄|shrink=줄어들다|shrinking=줄어드는|shooting from the hip=즉흥적으로 판단하기|simultaneous=동시의|simultaneously=동시에|sinking=침몰시키는|situated=처한|skeptical=회의적인|smelting=제련|socioemotional=사회정서적인|socioeconomic=사회경제적인|solely=오직|solicitation=권유|solid foundation=견고한 토대|sounding boards=조언 상대|spiritual=영적인|spontaneous=자발적인|spotlighting=조명하기|staggering=충격적인|standalone=독립형의|standard=표준|stand out=두드러지다|state agency=주 정부 기관|statements of cash flows=현금흐름표|statistical=통계적인|statutory=법정의|steer=이끌다|stemming from=~에서 비롯된|step in=개입하다|stimulate=자극하다|stonewalling=협상 거부|strain=부담|streamline=간소화하다|strengthen=강화하다|strengthened=강화된|stricter=더 엄격한|strive=애쓰다|strong-arm tactic=강압적 전술|struggle=고군분투하다|subordinate=하급자|subordinates=부하 직원들|subset=부분집합|substantial=상당한|substantiated=입증된|subtle=미묘한|subtle acts=미묘한 차별 행동|suffice=충분하다|superior=상급자/우수한|suspending=정지시키는|suspension=정직|symbiotic=공생의|tactics=전술|tactical=전술적인|tailor=맞추다|tasked=임무를 맡은|temptation=유혹|tendency=경향|terminable=종료 가능한|terminology=전문 용어|terrific=아주 멋진|testifying=증언하기|the "go-to" expert=믿고 찾는 전문가|the interests=이해관계|theft=절도|theocracies=신권 정치|thereby=그렇게 함으로써|threshold=임계점|timely=적시의|tolerate=용인하다|touchstones=판단 기준|toxicity=유해성|traction=추진력|trades=숙련 기술직|trait=특성|transaction leadership=거래적 리더십|transcendence=초월|transformation leadership=변혁적 리더십|transnational=초국적의|transpositions=자리바꿈 오류|tricky=까다로운|trigger=촉발하다|turmoil=혼란|turn away=외면하다|typos=오타|unbiased=편견 없는|undercut=저하시키다|undergo=겪다|undergoing=겪고 있는|underlying=근저에 있는|undermine=훼손하다|underpinning=토대|undertake=착수하다|undervalue=과소평가하다|uneasy=불안한|unfolded=펼쳐진|unfounded=근거 없는|unguarded=방심한|uniformity=획일성|uniformly=균일하게|unified=통합된|unionization=노조 결성|unlikely=가능성 없는|unnecessary=불필요한|unnecessarily=불필요하게|unreflective=무반성적인|unregulated=규제받지 않는|unresolved=미해결의|unresponsive=반응이 없는|unsafe=안전하지 않은|unsuitable=부적합한|untold=막대한|uphold=유지하다|upfront=솔직한|vacancies=공석|valid=타당한|validity=타당성|values-led=가치 주도적인|valuing=존중하기|vary=다르다|varying=다양한|vast=방대한|veteran=퇴역 군인|vetted=검증된|viable=실행 가능한|violence=폭력|visceral=본능적인|visibly=눈에 띄게|visitations=방문 점검|vital=필수적인|vitally=필수적으로|volatility=변동성|voluntarily=자발적으로|vulnerability=취약성|walk up to someone=다가가다|warranted=정당한|watchdog=감시 기관|weigh in on=의견을 내다|well-received=호평 받는|whereas=반면에|whistleblowers=내부고발자|wield=행사하다|willingness=기꺼이 하는 마음|winging it=즉흥적으로 하기|withhold=보류하다|withholding=원천징수/보류|witness=목격자|workable=운용 가능한|world-renowned=세계적인|worldviews=세계관|wrong-doing=부정행위|yield=산출하다|particularly=특히|embedding=내재화|essential=필수적인|violated=위반한|competing interests=상충하는 이해관계|inconsistent=일관성 없는|disparities=격차|advancement=승진|act on=조치하다|demonstrate=입증하다|embarrassment=당혹감|quadrants=사분면|acquisition=인수|initially=초기에|threats=위협|subdivide=세분화하다|rely on=의존하다|impose=부과하다|compliments=칭찬들|enthusiastic=열정적인|extent=정도|comprise=구성하다|coherent=일관된|coalitions=연합|dismay=실망|discomfort=불편함|adversity=역경|consensus=합의|serving as=역할을 하는|act as a drag=방해물이 되다|make sure=확실히 하다|devote=헌신하다|disseminate=전파하다|suffer=고통받다|counteract=상쇄하다|virtuous=도덕적인|innate=타고난|faith=신뢰|disparate=이질적인|awareness=인식|unconscious=무의식적인|imposter=가면 증후군|innately=선천적으로|imposition=강요|provinces=지방|absenteeism=상습 결근|unfilled=미충원된|deterring=억제하는|scarce=희소한|shortfall=부족액|otherwise=그렇지 않으면|evident=명백한|jurisdictions=관할권|composition=구성|forgo=포기하다|retreat=워크숍/후퇴|interdepartmental=부서 간의|reassigning=재배정하는|serve=기여하다|thus=따라서|serving=제공하는|addiction=중독|subject to=~의 대상이 되는|grapple=씨름하다|quantitative=정량적인|qualitative=정성적인|in common=공통으로|adamant=단호한|class action lawsuits=집단 소송|At-will=임의 고용|sound decisions=합리적 의사결정|would be deemed=간주될 것이다|delineating=기술하는|sizable=상당한 규모의|grind=갈다/고된 일|retrieval=데이터 복구|warrant=정당화하다|aside=제쳐두고|considerable=상당한|exploration=탐색|garnishment=급여 압류|presidential=대통령의|Executive orders=행정명령|proclamations=포고문|clause=조항|in a neat=단정한|orderly=질서 있는|bureaucracy=관료제|confrontation=대립|hostile=적대적인|regressive=역진적인|deduction=공제|violate=위반하다|exhausted=소진된|charter=헌장|democratic=민주적인|concerted=공동의(단체행동)|employability=고용 가능성|defamation=명예훼손|soak=흡수하다|derive=도출하다|perks=복리후생 특전|Chauffeurs=운전기사|nanny=보모|Feasibility=실현 가능성|tactile=촉각의|Eliminating=제거하는|eligible=적격의|restoration=복원|affordably=저렴하게|externalization=외부화|preventive=예방적인|hesitant=주저하는|disposable earnings=가처분 소득|discretionary=재량의|Scatter diagram=산점도|Portability=연금 이동성|amended=개정된|breaches=위반/침해|statute=법령|Wrongful terminations=부당 해고|convicted=유죄 판결을 받은|collective-bargaining=단체 교섭|be mindful of=유념하다|referrals=추천|time allowance=허용 시간|statute of limitations=소멸시효|epidemiologic=역학의|occurrences=발생 건수|substance=약물/물질|disorders=질환/장애|post-incident=사고 발생 후의|exaggerated=과장된|janitor=관리인/청소원|unconventional=비관습적인|undesirable=바람직하지 않은|hazardous=유해한|infectious=전염성의|adverse employment actions=불리한 고용 조치|Reinstatement=복직|prevailing=지배적인|fringed=부가적인|procuring=조달|deferrals=지급 연기|levy=부과/징수|recordkeeping=기록 보존|resubmitting=재제출|mandates=의무 명령|occupational=직업상의|societal=사회적인|due-diligence=상당한 주의|appraisal=인사 평가|pivotal=중추적인|onshoring=온쇼어링(국내 복귀)|near-shoring=니어쇼어링(인접국 이전)|prorated=일할 계산된|stressor=스트레스 요인|insecurity=불안정|ergonomic=인체공학적인|inherent=내재하는|compensatory=보상적인|lieu=대신(in lieu of)|bear the responsibility=책임을 지다|regulatory statutes=규제 법령|be binding=구속력이 있다|Valence=유의성(기대이론)|fulfilling=성취감을 주는|Expectancy=기대감(기대이론)|exert=발휘하다|interim=임시의|disclosed=공개된|inspection=점검/실사|dismissed=기각된/해고된|Leafleting=전단지 배포|protest=항의/시위|radiation=방사선|inappropriate=부적절한|solicit=권유하다|bona-fide=진정직업자격의|omnibus=포괄적인|accrual=발생/누적|investigatory=조사의|discharge=해고하다|criticism=비판|tripartite=노사정 3자의|executive order=행정명령|judicial=사법의|doctrines=법리|amendment=수정 조항|signify=의미하다|restrictions=제한|forbidding=금지하는|thermal=열의/온도의|injunction=법원 금지명령|exemplary=징벌적/모범적|routinely=일상적으로|formative=형성적인|arousal=각성|symptoms=증상|disillusionment=환멸|chronic fatigue=만성 피로|forgetfulness=건망증|irritable=예민한|defiance=저항/반항|exhaustion=탈진|adhere=준수하다|foreseeable=예견 가능한|vicarious=대리 책임의|convinced=확신하는|hypothetical=가상의|purview=관할 범위|contradicted=모순된|fatal=치명적인|hospitalization=입원|hunch=직감|overconfidence=과신|equivalent=동등한 것|pension=연금|gratification=만족감|due process=적법 절차|Imminent=임박한|Catastrophes=중대 재해|artifacts=가시적 산물(조직문화)|passionate=열정적인|collectivistic=집단주의적인|unholy=부당한|trinity=3대 요소|negligence=과실/태만|doctrine=법리/원칙|contributory=기여 과실의|servant=피용자|respondent=피고/사용자|quid pro quo=대가성 성희롱|supersedes=우선하다/대체하다|unreimbursed=미상환된|Affirmative Action Plan=적극적 우대조치 계획|placement=인력 배치|availability=인력 가용성|periodic=정기적인|Disparate treatment=의도적 차별 대우|chemotherapy=항암 화학요법|breast cancer=유방암|vestibule=모의 작업장 훈련|duty of diligence=주의 의무|obedience=복종의 의무|stratification=계층화|overreliance=지나친 의존|impoverished=무관심형(리더십)|perish=소멸하다|purposely=고의로|deliberate=의도적인|mastery=숙달|chronic=만성적인|fatigue=피로|irritability=과민성|inability to concentrate=집중력 저하|mood swings=감정 기복|social withdrawal=사회적 위축|procrastination=미루는 버릇|indecision=우유부단|indigestion=소화불량|intestinal problems=위장 장애|depression=우울증|circulating=유포되는|gossiping=뒷담화|gross misconduct=중대한 비위행위|taxable=과세 대상의|imputed=간주 소득의|exceeding=초과하는|dexterity=손재주|coordination=협응력|manual dexterity=수작업 능력|Psychomotor=정신운동의|is referred to=~로 불리다|sufficient=충분한|precedent=판례/선례|ad hoc=임시 특별의|conjunction=연계/결합|fatality=사망 사고|occurrence=발생 사건|deem as unlawful=불법으로 간주하다|focal=일괄 평가의|pension plan=연금 제도`;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>const basePool = dRaw.split('|').filter(Boolean).map(item =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>let idx = item.indexOf('=');</p>
+<p class="p1"><span class="Apple-converted-space">      </span>return { w: item.substring(0, idx).trim(), m: item.substring(idx + 1).trim() };</p>
+<p class="p1"><span class="Apple-converted-space">    </span>});</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>let pool = JSON.parse(JSON.stringify(basePool));</p>
+<p class="p1"><span class="Apple-converted-space">    </span>let wrongW = {};</p>
+<p class="p1"><span class="Apple-converted-space">    </span>let hist = [];</p>
+<p class="p1"><span class="Apple-converted-space">    </span>try {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>let sP = localStorage.getItem('hr_p_v11'); if(sP) pool = JSON.parse(sP);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>let sW = localStorage.getItem('hr_w_v11') || localStorage.getItem('hr_w_v10'); if(sW) wrongW = JSON.parse(sW);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>let sH = localStorage.getItem('hr_h_v11') || localStorage.getItem('hr_h_v10'); if(sH) hist = JSON.parse(sH);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>} catch(e) {}</p>
+<p class="p2"><span class="Apple-converted-space">    </span></p>
+<p class="p1"><span class="Apple-converted-space">    </span>function save() {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>try {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>localStorage.setItem('hr_p_v11', JSON.stringify(pool));</p>
+<p class="p1"><span class="Apple-converted-space">        </span>localStorage.setItem('hr_w_v11', JSON.stringify(wrongW));</p>
+<p class="p1"><span class="Apple-converted-space">        </span>localStorage.setItem('hr_h_v11', JSON.stringify(hist));</p>
+<p class="p1"><span class="Apple-converted-space">      </span>} catch(e) {}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>function shuf(a) { return a.slice().sort(()=&gt;Math.random()-0.5); }</p>
+<p class="p1"><span class="Apple-converted-space">    </span>function formatD(d) {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>var p = n =&gt; n&lt;10?'0'+n:n;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>return d.getFullYear()+'-'+p(d.getMonth()+1)+'-'+p(d.getDate())+' '+p(d.getHours())+':'+p(d.getMinutes());</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>let qQueue = [], qTypes = [], qIdx = 0, qScore = 0, cur = null, isRev = false;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>function rDash() {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>document.getElementById('quiz').classList.remove('active');</p>
+<p class="p1"><span class="Apple-converted-space">      </span>document.getElementById('dash').classList.add('active');</p>
+<p class="p1"><span class="Apple-converted-space">      </span>let wKeys = Object.keys(wrongW);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>document.getElementById('w-cnt').innerText = wKeys.length;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>document.getElementById('n-cnt').innerText = wKeys.length;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>document.getElementById('t-cnt').innerText = pool.length;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>let hl = document.getElementById('hist-list');</p>
+<p class="p1"><span class="Apple-converted-space">      </span>hl.innerHTML = '';</p>
+<p class="p1"><span class="Apple-converted-space">      </span>if(hist.length===0) {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>hl.innerHTML = '&lt;div style="color:#64748b; font-size:14px; text-align:center; padding:8px;"&gt;기록이 없습니다.&lt;/div&gt;';</p>
+<p class="p1"><span class="Apple-converted-space">      </span>}</p>
+<p class="p1"><span class="Apple-converted-space">      </span>for(var i=hist.length-1; i&gt;=0; i--) {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>let hi = hist[i];</p>
+<p class="p1"><span class="Apple-converted-space">        </span>let d = document.createElement('div'); d.className='hist-item';</p>
+<p class="p1"><span class="Apple-converted-space">        </span>let scoreText = (hi.score100 !== undefined ? hi.score100 : Math.round((hi.s / hi.t) * 100)) + '점';</p>
+<p class="p1"><span class="Apple-converted-space">        </span>d.innerHTML = '&lt;span&gt;'+hi.d+(hi.r?' &lt;b style="color:#ef4444;"&gt;[복습]&lt;/b&gt;':'' )+'&lt;/span&gt;&lt;span style="color:#38bdf8; font-weight:bold;"&gt;'+scoreText+' ('+hi.s+'/'+hi.t+')&lt;/span&gt;';</p>
+<p class="p1"><span class="Apple-converted-space">        </span>hl.appendChild(d);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>function start(rev) {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>isRev = rev;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>let src = rev ? Object.values(wrongW) : pool;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>if(src.length &lt; 4) {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>alert(rev ? "틀린 단어가 부족합니다. (최소 4개 필요)" : "단어풀에 단어가 부족합니다. (최소 4개 필요)");</p>
+<p class="p1"><span class="Apple-converted-space">        </span>return;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>}</p>
+<p class="p1"><span class="Apple-converted-space">      </span>let limit = Math.min(src.length, 20);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>qQueue = shuf(src).slice(0, limit);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>qTypes = [];</p>
+<p class="p1"><span class="Apple-converted-space">      </span>let half = Math.floor(limit / 2);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>for(let i=0; i&lt;limit; i++) qTypes.push(i &lt; half ? 0 : 1);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>qTypes = shuf(qTypes);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>qIdx = 0; qScore = 0;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>document.getElementById('dash').classList.remove('active');</p>
+<p class="p1"><span class="Apple-converted-space">      </span>document.getElementById('quiz').classList.add('active');</p>
+<p class="p1"><span class="Apple-converted-space">      </span>document.getElementById('q-mode').innerText = rev ? "틀린 단어 복습" : "일반 퀴즈";</p>
+<p class="p1"><span class="Apple-converted-space">      </span>renderQ();</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>function speakWord(wText) {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>let wordToSpeak = wText || (cur ? cur.w : '');</p>
+<p class="p1"><span class="Apple-converted-space">      </span>if (!wordToSpeak) return;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>if ('speechSynthesis' in window) {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>window.speechSynthesis.cancel();</p>
+<p class="p1"><span class="Apple-converted-space">        </span>let u = new SpeechSynthesisUtterance(wordToSpeak);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>u.lang = 'en-US'; u.rate = 0.9;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>window.speechSynthesis.speak(u);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>} else {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>alert("이 브라우저는 음성 재생을 지원하지 않습니다.");</p>
+<p class="p1"><span class="Apple-converted-space">      </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>function renderQ() {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>document.getElementById('q-prog').innerText = (qIdx+1) + " / " + qQueue.length;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>cur = qQueue[qIdx];</p>
+<p class="p1"><span class="Apple-converted-space">      </span>let cType = qTypes[qIdx], dist = [], pShuf = shuf(pool);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>for(var i=0; i&lt;pShuf.length; i++) {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>if(pShuf[i].w !== cur.w &amp;&amp; pShuf[i].m !== cur.m) dist.push(pShuf[i]);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>if(dist.length &gt;= 3) break;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>}</p>
+<p class="p1"><span class="Apple-converted-space">      </span>let opts = shuf([cur].concat(dist));</p>
+<p class="p1"><span class="Apple-converted-space">      </span>let qw = document.getElementById('qw');</p>
+<p class="p1"><span class="Apple-converted-space">      </span>qw.innerText = cType === 0 ? cur.w : cur.m;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>if(cType === 1) qw.classList.add('ko'); else qw.classList.remove('ko');</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">      </span>let b = document.getElementById('opts');</p>
+<p class="p1"><span class="Apple-converted-space">      </span>b.innerHTML = '';</p>
+<p class="p1"><span class="Apple-converted-space">      </span>opts.forEach(o =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>let btn = document.createElement('button');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>btn.className = 'opt-btn';</p>
+<p class="p1"><span class="Apple-converted-space">        </span>btn.innerText = cType === 0 ? o.m : o.w;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>btn.onclick = () =&gt; checkA(btn, cType === 0 ? (o.m === cur.m) : (o.w === cur.w), cType);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>b.appendChild(btn);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>});</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>function checkA(btn, ok, cType) {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>let all = document.querySelectorAll('.opt-btn');</p>
+<p class="p1"><span class="Apple-converted-space">      </span>all.forEach(x =&gt; x.style.pointerEvents = 'none');</p>
+<p class="p1"><span class="Apple-converted-space">      </span>if(ok) {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>qScore++;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>btn.classList.add('ok');</p>
+<p class="p1"><span class="Apple-converted-space">      </span>} else {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>btn.classList.add('no');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>if (!wrongW[cur.w]) {</p>
+<p class="p1"><span class="Apple-converted-space">          </span>wrongW[cur.w] = { w: cur.w, m: cur.m, count: 1 };</p>
+<p class="p1"><span class="Apple-converted-space">        </span>} else {</p>
+<p class="p1"><span class="Apple-converted-space">          </span>wrongW[cur.w].count = (wrongW[cur.w].count || 0) + 1;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>wrongW[cur.w].m = cur.m;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>let targetText = cType === 0 ? cur.m : cur.w;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>all.forEach(x =&gt; { if(x.innerText === targetText) x.classList.add('ok'); });</p>
+<p class="p1"><span class="Apple-converted-space">      </span>}</p>
+<p class="p1"><span class="Apple-converted-space">      </span>save();</p>
+<p class="p1"><span class="Apple-converted-space">      </span>setTimeout(() =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>qIdx++;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>if(qIdx &lt; qQueue.length) renderQ(); else endQ();</p>
+<p class="p1"><span class="Apple-converted-space">      </span>}, 800);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>function endQ() {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>let finalScore = Math.round((qScore / qQueue.length) * 100);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>hist.push({ d: formatD(new Date()), s: qScore, t: qQueue.length, score100: finalScore, r: isRev });</p>
+<p class="p1"><span class="Apple-converted-space">      </span>save();</p>
+<p class="p1"><span class="Apple-converted-space">      </span>alert("퀴즈 완료! 성적: " + finalScore + "점 / 100점 (" + qScore + "/" + qQueue.length + "개 정답)");</p>
+<p class="p1"><span class="Apple-converted-space">      </span>rDash();</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>function goDash() {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>if(confirm("정말로 퀴즈를 중단하시겠습니까? (성적은 저장되지 않습니다)")) rDash();</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>function openNote() {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>document.getElementById('note-mod').style.display = 'flex';</p>
+<p class="p1"><span class="Apple-converted-space">      </span>renderNote();</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>function closeNote() {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>document.getElementById('note-mod').style.display = 'none';</p>
+<p class="p1"><span class="Apple-converted-space">      </span>rDash();</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>function renderNote() {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>let nl = document.getElementById('note-list');</p>
+<p class="p1"><span class="Apple-converted-space">      </span>nl.innerHTML = '';</p>
+<p class="p1"><span class="Apple-converted-space">      </span>let list = Object.values(wrongW).sort((a, b) =&gt; (b.count || 1) - (a.count || 1));</p>
+<p class="p1"><span class="Apple-converted-space">      </span>if(list.length === 0) {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>nl.innerHTML = '&lt;div style="color:#94a3b8; font-size:15px; text-align:center; padding:30px 10px;"&gt;오답 기록이 없습니다.&lt;br&gt;모두 완벽히 암기하셨습니다! 🎉&lt;/div&gt;';</p>
+<p class="p1"><span class="Apple-converted-space">        </span>return;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>}</p>
+<p class="p1"><span class="Apple-converted-space">      </span>list.forEach(item =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>let card = document.createElement('div');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>card.className = 'note-card';</p>
+<p class="p1"><span class="Apple-converted-space">        </span>let safeW = item.w.replace(/'/g, "\\'");</p>
+<p class="p1"><span class="Apple-converted-space">        </span>card.innerHTML = `</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="note-info"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="note-word-row"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;span class="note-w"&gt;${item.w}&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;button class="speak-btn" style="width:28px; height:28px; font-size:14px;" onclick="speakWord('${safeW}')"&gt;🔊&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">              </span>&lt;span class="note-badge"&gt;${item.count || 1}회 오답&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="note-m"&gt;${item.m}&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;button class="btn-done" onclick="completeWord('${safeW}')"&gt;암기완료&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>`;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>nl.appendChild(card);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>});</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>function completeWord(w) {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>if(wrongW[w]) {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>delete wrongW[w];</p>
+<p class="p1"><span class="Apple-converted-space">        </span>save(); renderNote(); rDash();</p>
+<p class="p1"><span class="Apple-converted-space">      </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>function openM() {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>document.getElementById('mod').style.display='flex';</p>
+<p class="p1"><span class="Apple-converted-space">      </span>document.getElementById('ta').value = '';</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>function closeM() { document.getElementById('mod').style.display='none'; }</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>function saveM() {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>let v = document.getElementById('ta').value;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>if(!v.trim()) return closeM();</p>
+<p class="p1"><span class="Apple-converted-space">      </span>if(v.trim() === 'reset') {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>localStorage.removeItem('hr_p_v11'); localStorage.removeItem('hr_w_v11'); localStorage.removeItem('hr_h_v11');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>pool = JSON.parse(JSON.stringify(basePool)); wrongW = {}; hist = []; alert('기본 단어풀(' + pool.length + '개)로 초기화 완료!');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>closeM(); rDash(); return;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>}</p>
+<p class="p1"><span class="Apple-converted-space">      </span>let ps = v.split(',');</p>
+<p class="p1"><span class="Apple-converted-space">      </span>for(let i=0; i&lt;ps.length; i++) {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>let kv = ps[i].split('=');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>if(kv.length===2 &amp;&amp; kv[0].trim() &amp;&amp; kv[1].trim()) {</p>
+<p class="p1"><span class="Apple-converted-space">          </span>let w = kv[0].trim(), m = kv[1].trim();</p>
+<p class="p1"><span class="Apple-converted-space">          </span>let existing = pool.find(item =&gt; item.w.toLowerCase() === w.toLowerCase());</p>
+<p class="p1"><span class="Apple-converted-space">          </span>if(existing) existing.m = m;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>else pool.push({ w: w, m: m });</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">      </span>}</p>
+<p class="p1"><span class="Apple-converted-space">      </span>save();</p>
+<p class="p1"><span class="Apple-converted-space">      </span>alert("반영 완료! (현재 총 단어 수: " + pool.length + "개)");</p>
+<p class="p1"><span class="Apple-converted-space">      </span>closeM(); rDash();</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>rDash();</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/script&gt;</p>
+<p class="p1">&lt;/body&gt;</p>
+<p class="p1">&lt;/html&gt;</p>
+</body>
+</html>
